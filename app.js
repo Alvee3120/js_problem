@@ -1,82 +1,235 @@
-// Your solution goes here
-// API -> https://64b2e33138e74e386d55b072.mockapi.io/api/hanover
-
-// cart counter
-
-var count = document.getElementById("iits-cart_counter");
-var cartinc = document.querySelectorAll(".addToCartBtn");
-var cartdec = document.getElementById("cart_dec");
-var allitems = document.getElementById("iits-items");
-
-for (let i = 0; i < cartinc.length; i++) {
-  cartinc.addEventListener("click", function () {
-    count.textContent = parseInt(count.textContent) + 1;
-  });
-}
-
-cartdec.addEventListener("click", function () {
-  if (parseInt(count.textContent) > 0) {
-    count.textContent = parseInt(count.textContent) - 1;
-  }
-});
-
 const items = [
   {
-    DataCategory: "burger",
+    type: "burger",
+    category: "Burger ",
     image:
-      "https://www.foodandwine.com/thmb/pwFie7NRkq4SXMDJU6QKnUKlaoI=/1500x0/filters:no_upscale():max_bytes(150000):strip_icc()/Ultimate-Veggie-Burgers-FT-Recipe-0821-5d7532c53a924a7298d2175cf1d4219f.jpg",
-    CategoryPill: "burger",
-    title: "Ultimate Veggie Burgers",
+      "https://www.seriouseats.com/thmb/e16lLOoVEix_JZTv7iNyAuWkPn8=/1500x0/filters:no_upscale():max_bytes(150000):strip_icc()/__opt__aboutcom__coeus__resources__content_migration__serious_eats__seriouseats.com__recipes__images__2014__09__20140918-jamie-olivers-comfort-food-insanity-burger-david-loftus-f7d9042bdc2a468fbbd50b10d467dafd.jpg",
+    title: "Beef Burger",
     description:
-      "These veggie burgers hit every satisfying, savory note with a hearty mix of pearl barley, chickpeas, mushrooms, and crispy panko. For the sturdiest patties, evenly distribute the panko by stirring the patty mixture until very well-combined.",
+      "No grill, no problemo! Here's how to make an incredible burger indoors on the stove. An optional quick seasoning mix takes it to the next level",
+    CartButton: "Add To Cart",
     id: 1,
-    cart: "Add to Cart",
+  },
+
+  {
+    type: "coffee",
+    category: "Coffee",
+    image:
+      "https://insanelygoodrecipes.com/wp-content/uploads/2020/07/Cup-Of-Creamy-Coffee-500x375.png",
+    title: "beef Coffee",
+    description:
+      "No grill, no problemo! Here's how to make an incredible burger indoors on the stove. An optional quick seasoning mix takes it to the next level",
+    CartButton: "Add To Cart",
+    id: 1,
+  },
+
+  {
+    type: "burger",
+    category: "Burger ",
+    image:
+      "https://www.seriouseats.com/thmb/e16lLOoVEix_JZTv7iNyAuWkPn8=/1500x0/filters:no_upscale():max_bytes(150000):strip_icc()/__opt__aboutcom__coeus__resources__content_migration__serious_eats__seriouseats.com__recipes__images__2014__09__20140918-jamie-olivers-comfort-food-insanity-burger-david-loftus-f7d9042bdc2a468fbbd50b10d467dafd.jpg",
+    title: "Chicken Burger",
+    description:
+      "No grill, no problemo! Here's how to make an incredible burger indoors on the stove. An optional quick seasoning mix takes it to the next level",
+    CartButton: "Add To Cart",
+    id: 1,
   },
   {
-    DataCategory: "coffee",
+    type: "coffee",
+    category: "Coffee ",
     image:
-      "https://images.immediate.co.uk/production/volatile/sites/30/2020/08/flat-white-3402c4f.jpg",
-    CategoryPill: "coffee",
-    title: "Hot coffee",
+      "https://insanelygoodrecipes.com/wp-content/uploads/2020/07/Cup-Of-Creamy-Coffee-500x375.png",
+    title: "Cold Coffee",
     description:
-      "These veggie burgers hit every satisfying, savory note with a hearty mix of pearl barley, chickpeas, mushrooms, and crispy panko. For the sturdiest patties, evenly distribute the panko by stirring the patty mixture until very well-combined.",
-    id: 2,
-    cart: "Add to Cart",
-  },
-  {
-    DataCategory: "coffee",
-    image:
-      "https://www.whiskaffair.com/wp-content/uploads/2021/04/Chocolate-Cold-Coffee-2-3.jpg",
-    CategoryPill: "coffee",
-    title: "Chocolate Cold Coffee Recipe",
-    description:
-      "These veggie burgers hit every satisfying, savory note with a hearty mix of pearl barley, chickpeas, mushrooms, and crispy panko. For the sturdiest patties, evenly distribute the panko by stirring the patty mixture until very well-combined.",
-    cart: "Add to Cart",
-    id: 3,
+      "No grill, no problemo! Here's how to make an incredible burger indoors on the stove. An optional quick seasoning mix takes it to the next level",
+    CartButton: "Add To Cart",
+    id: 1,
   },
 ];
 
-function showItems(item) {
-  return `<div class="item col-md-6 col-lg-4 p-3" data-category="${item.DataCategory}">
-                    <div class="card">
-                      <div class="img-container">
-                        <img src="${item.image}" />
-                        <span class="category-pill">${item.CategoryPill}</span>
-                      </div>
-                      <div class="card-body">
-                        <h5 class="card-title">${item.title}</h5>
-                        <p class="card-text">${item.description}</p>
-                        <button class="addToCartBtn btn w-100">${item.cart}</button>
-                      </div>
-                    </div>
-                  </div>
-                  `;
-}
-function renderitems() {
-  allitems.innerHTML = "";
-  items.map(function (item) {
-    allitems.innerHTML = allitems.innerHTML + showItems(item);
-  });
+function showFood(food) {
+  return ` <div class="item col-md-6 col-lg-4 p-3" data-category="coffee">
+  <div class="card">
+    <div class="img-container">
+      <img src="${food.image}" alt="Coffee" />
+      <span class="category-pill">${food.category}</span>
+    </div>
+    <div class="card-body">
+      <h5 class="card-title">${food.title}</h5>
+      <p class="card-text">${food.description}</p>
+  
+  
+      <button class="addToCartBtn btn w-100">${food.CartButton}</button>
+    </div>
+  </div>
+  </div>
+  `;
 }
 
-renderitems();
+var allitems = document.querySelector("#iits-items");
+var searchFrom = document.querySelector("#searchForm");
+var searchVal = document.querySelector("#iits-searchBox");
+var carttext = document.getElementById("iits-cart_counter");
+var minusbtn = document.getElementById("cart_dec");
+const allToggleBtn = document.getElementById("all_toggle");
+const coffeeToggleBtn = document.getElementById("coffee_toggle");
+const burgerToggleBtn = document.getElementById("burger_toggle");
+var adminBtn = document.getElementById("iits-adminBtn");
+var additemform = document.getElementById("iits-adminSection");
+var cancelBtn = document.getElementById("iits-cancelBtn");
+const addNewItemForm = document.getElementById("iits-addNewForm");
+const title = document.querySelector("#name");
+const image = document.querySelector("#pic");
+const description = document.querySelector("#desc");
+const type = document.querySelector("#typeItem");
+let searchValLocal = "";
+
+//Render all item to the dom and also filter item for search
+
+// updated render function
+
+function renderitems(elements) {
+  allitems.innerHTML = "";
+  elements.map(function (food) {
+    if (food.title.toLowerCase().includes(searchValLocal.toLowerCase())) {
+      allitems.innerHTML += showFood(food);
+    }
+  });
+  if (allitems.innerHTML == "")
+    allitems.innerHTML = `<span class="bg-danger text-white py-2 rounded">Nothing Found</span>`;
+  increment();
+}
+
+// Search functionality
+
+searchFrom.addEventListener("submit", function (e) {
+  e.preventDefault();
+  searchValLocal = searchVal.value;
+  const updatedData = items.filter((item) =>
+    item.title.toLowerCase().includes(searchValLocal)
+  );
+
+  renderitems(updatedData);
+});
+
+// initial rendering call
+renderitems(items);
+
+// Add click event listeners to the filter radio buttons
+allToggleBtn.addEventListener("click", handleCategoryToggle);
+coffeeToggleBtn.addEventListener("click", handleCategoryToggle);
+burgerToggleBtn.addEventListener("click", handleCategoryToggle);
+
+// Function to handle item filtering based on selected category
+function handleCategoryToggle(e) {
+  const selectedCategory = e.target.value;
+
+  console.log(selectedCategory);
+
+  let filteredItems = [];
+
+  if (selectedCategory === "all") {
+    filteredItems = [...items];
+  } else {
+    filteredItems = items.filter(function (item) {
+      return item.type === selectedCategory;
+    });
+  }
+
+  renderitems(filteredItems);
+}
+
+//increment
+function increment() {
+  let addToCart = document.querySelectorAll(".addToCartBtn");
+  addToCart.forEach(function (btn) {
+    btn.addEventListener("click", function () {
+      carttext.textContent = parseInt(carttext.textContent) + 1;
+    });
+  });
+}
+// cart text decrement
+
+minusbtn.addEventListener("click", function () {
+  if (parseInt(carttext.textContent) > 0) {
+    carttext.textContent = parseInt(carttext.textContent) - 1;
+  }
+});
+
+//admin form show
+function hideForm() {
+  additemform.style.display = "none";
+}
+
+hideForm();
+
+adminBtn.addEventListener("click", formhandling);
+
+function formhandling() {
+  var enteredUsername = prompt("Please Enter Your Username : ");
+  var enteredPassword = prompt("Please Enter Your Password : ");
+
+  var correctUsername = "iits";
+  var correctpassword = "23";
+
+  if (
+    enteredUsername == correctUsername &&
+    enteredPassword == correctpassword
+  ) {
+    additemform.style.display = "block";
+  } else {
+    alert("You Entered wrong Information.Please Try again");
+  }
+}
+cancelBtn.addEventListener("click", function () {
+  additemform.style.display = "none";
+});
+
+//Add new item
+
+addNewItemForm.addEventListener("submit", function (e) {
+  e.preventDefault();
+
+  let lastObj = items[items.length - 1];
+  let lastId = 0;
+  if (lastObj != undefined) {
+    let lastId = lastObj.id;
+  }
+
+  let newObj = {
+    type: type.value,
+    category: type.value,
+    image: image.value,
+    title: title.value,
+    description: description.value,
+    id: lastId + 1,
+    CartButton: "Add to Cart",
+  };
+
+  //Check Wheather every feilds is fill up or not
+
+  if (
+    type.value === "" ||
+    image.value === "" ||
+    title.value === "" ||
+    description.value === ""
+  ) {
+    alert(" Please Fill Up Every Feilds");
+  }
+
+  //If yes then item will be added
+  else {
+    items.push(newObj);
+    renderitems(items);
+    clearForm();
+    hideForm();
+    newObj = "";
+  }
+});
+
+function clearForm() {
+  description.value = "";
+  title.value = "";
+  image.value = "";
+  type.value = "";
+}
